@@ -83,6 +83,26 @@
             transform: scale(2);
             /* 缩放状态的缩放比例为1.5 */
         }
+        
+        .nav {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(85, 85, 85, 0.3);
+        }
+        
+        .nav li {
+            font-size: 20px;
+            line-height: 50px;
+            text-align: center;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -97,7 +117,11 @@
             </div>
 
         </div>
-        <div class="nav"></div>
+        <div class="nav">
+            <ul>
+                <li><a href="./mm.html">妹妹</a> </li>
+            </ul>
+        </div>
     </div>
     <script>
         const i1 = document.querySelector('.ico i:nth-child(1)')
