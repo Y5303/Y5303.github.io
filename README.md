@@ -1,201 +1,94 @@
-# 介绍
+# 码志
 
-主题使用`Vuepress`进行搭建
+我的个人博客：<https://mazhuang.org>，欢迎 Star 和 Fork。
 
-## 更新日志
+## 概览
 
-- 2020.11.01 ～更改评论样式和默认语言,添加返回顶部功能
-- 2020.10.31 ～更改文章目录实现逻辑和样式，修改文章标题显示样式,增加头像转动的小彩蛋,添加 github 评论功能
-- 2020.10.21 ～修复目录内容过多导致的标题显示不全问题
-- 2020.11.13 ～ 1.0.0 版正式发布到 npm
-- 2020.12.22 ～ 修复标签分类的分页 bug 以及移动端个人信息不能自定义 bug
-- 2020.12.22 ～ 添加 back to top 功能，添加文章目录功能，添加自定义 logo 功能,更改 QQ 为微信显示二维码的形式
-- 2021.1.7 ～ 修复分类过多布局不会自适应的 bug
+<!-- vim-markdown-toc GFM -->
 
-# 快速上手
+* [效果预览](#效果预览)
+* [Fork 指南](#fork-指南)
+* [使用文档](#使用文档)
+* [经验与思考](#经验与思考)
+* [联系我](#联系我)
+* [致谢](#致谢)
 
-首先需要保证你已经全局安装了`vuepress`
+<!-- vim-markdown-toc -->
 
-```
-yarn add -D vuepress # npm install -D vuepress
-```
+## 效果预览
 
-> 在运行项目之前，请确保 blogs 文件夹里面至少有一篇文章，关于如何写文章，请参考[写作](#写作)
+**[在线预览 &rarr;](https://mazhuang.org)**
 
-## 脚手架方式
+![screenshot home](https://mazhuang.org/assets/images/screenshots/home.png)
 
-```
-# 全局安装 vuepress-theme-libra-cli
-yarn global add vuepress-theme-libra-cli
+## Fork 指南
 
-# 使用vuepress-theme-libra-cli创建项目
-vuepress-theme-libra-cli create <项目名称>
+Fork 本项目之后，还需要做一些事情才能让你的页面「正确」跑起来。
 
-# 创建完成之后
+1. 正确设置项目名称与分支。
 
-cd <项目名称>
-yarn dev
-```
+   按照 GitHub Pages 的规定，名称为 `username.github.io` 的项目的 master 分支，或者其它名称的项目的 gh-pages 分支可以自动生成 GitHub Pages 页面。
 
-配置文件在 docs/.vuepress/config.js
+2. 修改域名。
 
-[写作](#写作)
+   如果你需要绑定自己的域名，那么修改 CNAME 文件的内容，并参考 [配置 GitHub Pages 站点的自定义域](https://docs.github.com/cn/pages/configuring-a-custom-domain-for-your-github-pages-site) 做好配置；如果不需要绑定自己的域名，那么删掉 CNAME 文件。
 
-## 普通方式
+3. 修改配置。
 
-### 初始化项目
+   网站的配置基本都集中在 \_config.yml 文件中，将其中与个人信息相关的部分替换成你自己的，比如网站的 url、title、subtitle 和第三方评论模块的配置等。
 
-在任何地方创建一个文件夹，这里命名为`my-blog`,命令行进入这个文件夹
+   **评论模块：** 目前支持 disqus、gitment、gitalk、utterances、beaudar 和 giscus，选用其中一种就可以了，推荐使用 giscus。它们各自的官方配置指南链接在 \_config.yml 文件的 Comments 一节里都贴出来了，请参考官方指南配置。
 
-```
-# 第一步
-yarn init -y
-# 或者
-npm init -y
+   **注意：** 如果使用 disqus，因为 disqus 处理用户名与域名白名单的策略存在缺陷，请一定将 disqus.username 修改成你自己的，否则请将该字段留空。我对该缺陷的记录见 [Issues#2][3]。
 
-# 第二步
-# 安装vuepress-theme-libra
-yarn add vuepress-theme-libra --dev
-# 或者
-npm install --save-dev vuepress-theme-libra
-# 如果使用npm安装，遇到Not Found，那么请将npm源切回 npm.org然后再进行安装
-```
+4. 删除我的文章与图片。
 
-安装完成之后，我们定义一下项目的基本目录结构
+   如下文件夹中除了 template.md 文件外，都可以全部删除，然后添加你自己的内容。
 
-```
-├── docs
-│   ├── .vuepress
-|       |___config.js  //项目的配置文件
-│   └── blogs   // 存放所有博客readme文件,也可以创建文件夹
-|       |___a.md
-|       |___b.md
-├── package.json
-|__ node_modules
-```
+   * \_posts 文件夹中是我已发布的博客文章。
+   * \_drafts 文件夹中是我尚未发布的博客文章。
+   * \_wiki 文件夹中是我已发布的 wiki 页面。
+   * \_fragments 文件夹中是我已发布的短文片段。
+   * images 文件夹中是我的文章和页面里使用的图片。
 
-接着在`package.json`中加入下面的命令代码
+5. 修改「关于」页面。
 
-```
-...
-"scripts": {
-  "dev": "vuepress dev docs"
-},
-...
-```
+   pages/about.md 文件内容对应网站的「关于」页面，里面的内容多为个人相关，将它们替换成你自己的信息，包括 \_data 目录下的 skills.yml 和 social.yml 文件里的数据。
 
-然后将下面的配置文件复制到`config.js`中,并根据自己的需求更改
+   skills.yml 和 social.yml 里内容的含义可以参考：[_data 目录下的 yml 文件内容含义](https://mazhuang.org/2020/05/03/blog-template-qna/#_data-%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84-yml-%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E5%90%AB%E4%B9%89)。
 
-```javascript
-module.exports = {
-  title: "Libra",
-  theme: "libra",
-  // 部署站点的基础路径，如果你想让你的网站部署到一个子路径下，你将需要设置它。如 GitHub pages，如果你想将你的网站部署到 https://foo.github.io/bar/，那么 base 应该被设置成 "/bar/"，它的值应当总是以斜杠开始，并以斜杠结束。
-  // base 将会作为前缀自动地插入到所有以 / 开始的其他选项的链接中，所以你只需要指定一次。
-  // 比如说你想部署到服务器上跟路径，那么你只需要将base设置为 / 即可。
-  base: "/libra-static-blog/",
-  head: [
-    ["link", { rel: "icon", href: "/favicon.ico" }],
-    [
-      "meta",
-      {
-        name: "viewport",
-        content: "width=device-width,initial-scale=1,user-scalable=no",
-      },
-    ],
-  ],
-  // 文章目录和 back to top
-  plugins: ["vuepress-plugin-table-of-contents", "@vuepress/back-to-top"],
-  // theme:
-  themeConfig: {
-    // Logo和时间线里的字母（文字）
-    logo: "L",
-    // 主页
-    home: {
-      title: "Libra",
-      subTitle: "在生活里，我们永远是初学者",
-    },
-    // 页脚
-    footer: {
-      // 版权信息
-      copyright: "Copyright © 2019-2020 Libra | 版权所有",
-    },
-    // 个人信息卡片
-    infoCard: {
-      // 头像
-      headerPic: "https://libra321.oss-cn-huhehaote.aliyuncs.com/avatar.jpg",
-      // 姓名
-      name: "Libra",
-      // 邮箱
-      mail: "libra085925@gmail.com",
-    },
-    // 联系人页面
-    contact: {
-      title: "Hello There !!!!",
-      subTitle1: "Thank you for visiting my blog",
-      subTitle2: "Hope we can make progress together",
-      // QQ二维码地址
-      qq:
-        "https://libra321.oss-cn-huhehaote.aliyuncs.com/blog/weixin-qrcode.png",
-      // 微信二维码地址
-      wechat:
-        "https://libra321.oss-cn-huhehaote.aliyuncs.com/blog/weixin-qrcode.png",
-      // 邮箱
-      mail: "libra085925@gmail.com",
-      // github地址
-      github: "https://github.com/Libra11",
-      // 头像图片地址
-      headerPic: "https://libra321.oss-cn-huhehaote.aliyuncs.com/avatar.jpg",
-    },
-    comment: {
-      // 是否显示评论列表
-      showComment: false,
-      // The owner's name of repository to store the issues and comments.
-      owner: "Libra11",
-      // The name of repository to store the issues and comments.
-      repo: "vuepress-theme-libra",
-      // The clientId & clientSecret introduced in OAuth2 spec.
-      clientId: "",
-      clientSecret: "",
-    },
-  },
-};
-```
+## 使用文档
 
-### 写作
+- [本博客模板常见问题 Q & A](https://mazhuang.org/2020/05/03/blog-template-qna/)。
 
-在`docs/blogs`里面添加博客文章，文章为`markdown`格式,文章以以下内容开头
+- 在本地预览博客效果可以参考 [Setting up your Pages site locally with Jekyll][2]。
 
-```
----
-title: Blogging Like a Hacker
-category: vue
-desc: wo bu zhi dao ni shi shei ke wo zhi dao ni wei le shei
-tag:
-  - vue
-  - javascript
-picture: https://libra321.oss-cn-huhehaote.aliyuncs.com/blog/flutter_clean_4.png
-date: "2019-10-14"
-Update: "2019-10-18"
----
-```
+## 经验与思考
 
-- `title`: 文章标题
-- `category`: 文章分类
-- `desc`: 文章描述
-- `tag`: 文章标签
-- `picture`: 文章缩略图`thumbnail`
-- `date`: 发表日期
-- `Update`: 更新日期（可选，没有则默认为发表日期）
+* 排版建议遵照一定的规范，推荐 [中文文案排版指北（简体中文版）][1]。
 
-添加好文章之后，控制台运行`yarn dev`或者`npm run dev`即可打开预览。
+* 简约，尽量每个页面都不展示多余的内容。
 
-### 部署
+* 有时一图抵千言，有时可能只会拖慢网页加载速度。
 
-控制台运行`vuepress build docs`即可在`.vuepress`文件夹下生成`dist`文件夹，包含了所有`html`、`css`、`js`以及静态文件，然后部署即可。
+* 言之有物，不做无痛之呻吟。
 
-# 支持
+* 如果写技术文章，那先将技术原理完全理清了再开始写，一边摸索技术一边组织文章效率较低。
 
-> 给作者买一杯咖啡
+* 杜绝难断句、难理解的长句子，如果不能将其拆分成几个简洁的短句，说明脑中的理解并不清晰。
 
-![image](https://libra321.oss-cn-huhehaote.aliyuncs.com/github/Group%202.png)
+* 可以学习一下那些高质量的博主，他们的行文，内容组织方式，有什么值得借鉴的地方。
+
+## 联系我
+
+如果对本博客模板或者内容有任何建议，可以通过 [Issues](https://github.com/mzlogin/mzlogin.github.io/issues) 或者微信公众号「闷骚的程序员」与我取得联系。
+
+<img width="192px" height="192px" src="https://mazhuang.org/assets/images/qrcode.jpg"/>
+
+## 致谢
+
+本博客外观基于 [DONGChuan](https://dongchuan.github.io) 修改，感谢！
+
+[1]: https://github.com/mzlogin/chinese-copywriting-guidelines
+[2]: https://help.github.com/articles/setting-up-your-pages-site-locally-with-jekyll/
+[3]: https://github.com/mzlogin/mzlogin.github.io/issues/2
