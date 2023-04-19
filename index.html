@@ -5,18 +5,120 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/iconfont/iconfont.css">
     <title>Document</title>
     <style>
-        div {
+        @font-face {
+            font-family: 'iconfont';
+            src: url('iconfont.eot');
+            src: url('iconfont.eot?#iefix') format('embedded-opentype'), url('iconfont.woff') format('woff'), url('iconfont.ttf') format('truetype'), url('iconfont.svg#iconfont') format('svg');
+        }
+        
+        .iconfont {
+            font-family: "iconfont" !important;
+            font-size: 16px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-stroke-width: 0.2px;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            height: 3000px;
+        }
+        
+        .header {
+            position: relative;
+            height: 100vh;
+            background-image: url(images/bj2.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .box {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 100px;
+            background-color: rgba(85, 85, 85, 0.6);
+            border-radius: 50px 50px 50px 50px;
+        }
+        
+        .box h1 {
+            margin-top: -120px;
             text-align: center;
+            font-size: 80px;
+            color: #fff;
+        }
+        
+        .ico {
+            width: 200px;
+            height: 100px;
+            margin: 50px auto;
+            /* margin: 40px auto; */
+        }
+        
+        .ico i {
+            padding-left: 20px;
+        }
+        
+        .iconfont {
             font-size: 40px;
-            margin: 200px auto;
+        }
+        
+        .active {
+            color: red;
+        }
+        
+        .zoom {
+            transform: scale(2);
+            /* 缩放状态的缩放比例为1.5 */
         }
     </style>
 </head>
 
 <body>
-    <div>Hello 我的第一个网站</div>
+    <div class="header">
+
+        <div class="box">
+            <h1>Hi Friend</h1>
+            <div class="ico">
+                <i class="iconfont">&#xe62b;</i>
+                <i class="iconfont">&#xe611;</i>
+            </div>
+
+        </div>
+        <div class="nav"></div>
+    </div>
+    <script>
+        const i1 = document.querySelector('.ico i:nth-child(1)')
+        const i2 = document.querySelector('.ico i:nth-child(2)')
+        i1.addEventListener('mouseover', function() {
+            i1.classList.add('active')
+            i1.classList.add('zoom')
+        })
+        i1.addEventListener('mouseout', function() {
+            i1.classList.remove('active')
+            i1.classList.remove('zoom')
+        })
+        i2.addEventListener('mouseover', function() {
+            i2.classList.add('active')
+            i2.classList.add('zoom')
+        })
+        i2.addEventListener('mouseout', function() {
+            i2.classList.remove('active')
+            i2.classList.remove('zoom')
+        })
+    </script>
 </body>
 
 </html>
