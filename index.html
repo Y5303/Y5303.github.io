@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/iconfont/iconfont.css">
-    <title>Document</title>
+    <title>5303</title>
     <style>
         @font-face {
             font-family: 'iconfont';
@@ -48,7 +48,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 500px;
-            height: 100px;
+            height: 80px;
             background-color: rgba(85, 85, 85, 0.6);
             border-radius: 50px 50px 50px 50px;
         }
@@ -63,12 +63,16 @@
         .ico {
             width: 200px;
             height: 100px;
-            margin: 50px auto;
-            /* margin: 40px auto; */
+            margin: 40px auto;
+            transition: all 0.3s ease;
         }
         
         .ico i {
-            padding-left: 20px;
+            margin-right: 50px;
+        }
+        
+        .ico i:hover {
+            transform: scale(1.2);
         }
         
         .iconfont {
@@ -77,11 +81,6 @@
         
         .active {
             color: red;
-        }
-        
-        .zoom {
-            transform: scale(2);
-            /* 缩放状态的缩放比例为1.5 */
         }
         
         .nav {
@@ -103,6 +102,34 @@
             text-decoration: none;
             color: #fff;
         }
+        
+        .box .wx {
+            position: absolute;
+            display: none;
+            left: 115px;
+            top: 85px;
+            width: 100px;
+            height: 100px;
+        }
+        
+        .box .wx img {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .box .qq {
+            position: absolute;
+            display: none;
+            left: 210px;
+            top: 85px;
+            width: 100px;
+            height: 100px;
+        }
+        
+        .box .qq img {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 
@@ -115,6 +142,8 @@
                 <i class="iconfont">&#xe62b;</i>
                 <i class="iconfont">&#xe611;</i>
             </div>
+            <div class="wx"><img src="images/wx.jpg" alt=""></div>
+            <div class="qq"><img src="images/qq.jpg" alt=""></div>
 
         </div>
         <div class="nav">
@@ -126,21 +155,24 @@
     <script>
         const i1 = document.querySelector('.ico i:nth-child(1)')
         const i2 = document.querySelector('.ico i:nth-child(2)')
+        const wx = document.querySelector('.wx')
+        const qq = document.querySelector('.qq')
         i1.addEventListener('mouseover', function() {
             i1.classList.add('active')
-            i1.classList.add('zoom')
+            wx.style.display = 'block'
         })
         i1.addEventListener('mouseout', function() {
             i1.classList.remove('active')
-            i1.classList.remove('zoom')
+            wx.style.display = 'none'
         })
         i2.addEventListener('mouseover', function() {
             i2.classList.add('active')
-            i2.classList.add('zoom')
+            qq.style.display = 'block'
         })
         i2.addEventListener('mouseout', function() {
             i2.classList.remove('active')
-            i2.classList.remove('zoom')
+            qq.style.display = 'none'
+
         })
     </script>
 </body>
